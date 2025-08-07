@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.5 on win32)" generated="2025-08-06T14:43:33.197677" rpa="false" schemaversion="5">
+<suite id="s1" name="Crud Tests Utilisateur" source="C:\wamp64\www\TEST_Qa\Projet_Qa_Tests\Lab_1\crud_tests_utilisateur.robot">
+<kw name="Create Session" owner="RequestsLibrary" type="SETUP">
+<msg time="2025-08-06T14:43:34.043031" level="INFO">Creating Session using : alias=fakestore, url=https://fakestoreapi.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>fakestore</arg>
+<arg>https://fakestoreapi.com</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-08-06T14:43:34.042810" elapsed="0.000482"/>
+</kw>
+<test id="s1-t1" name="Ajout Utilisateur - Scénario Passant" line="23">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-08-06T14:43:34.045053" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-08-06T14:43:34.044172" elapsed="0.000982"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-08-06T14:43:34.046082" level="INFO">${valid_user} = {'username': 'john_doe', 'email': 'john@example.com', 'password': '123456'}</msg>
+<var>${valid_user}</var>
+<arg>{"username": "john_doe", "email": "john@example.com", "password": "123456"}</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-08-06T14:43:34.045726" elapsed="0.000393"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-08-06T14:43:34.621900" level="INFO">POST Request : url=https://fakestoreapi.com/users 
+ path_url=/users 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '75'} 
+ body=b'{"username": "john_doe", "email": "john@example.com", "password": "123456"}' 
+ </msg>
+<msg time="2025-08-06T14:43:34.622349" level="INFO">POST Response : url=https://fakestoreapi.com/users 
+ status=201, reason=Created 
+ headers={'Date': 'Wed, 06 Aug 2025 14:43:35 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '9', 'Connection': 'keep-alive', 'CF-RAY': '96af4eb3e85435ab-MAD', 'access-control-allow-origin': '*', 'etag': 'W/"9-hVv0cNJophUD7CGn+ZqXp8tVGo0"', 'x-powered-by': 'Express', 'cf-cache-status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=smTSNJWuDKgIjNl3Rdn3BBrdCYxEuh%2BrljU2v2Yl30FnXv2u2Wg1lr3wvjeHwAEHpZRIfXzny7IakOE0mOJ3ExGZdwgUXhDxYgSyZa6J9%2BBoDdqfQVADhQvXbW%2BTnbPzm5SI"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'alt-svc': 'h3=":443"; ma=86400', 'server-timing': 'cfL4;desc="?proto=TCP&amp;rtt=60643&amp;min_rtt=58216&amp;rtt_var=26686&amp;sent=4&amp;recv=7&amp;lost=0&amp;retrans=0&amp;sent_bytes=2856&amp;recv_bytes=921&amp;delivery_rate=37610&amp;cwnd=235&amp;unsent_bytes=0&amp;cid=8648653a65602188&amp;ts=373&amp;x=0"'} 
+ body={"id":11} 
+ </msg>
+<msg time="2025-08-06T14:43:34.622633" level="INFO">C:\Users\bchan\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'fakestoreapi.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-08-06T14:43:34.624607" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>fakestore</arg>
+<arg>/users</arg>
+<arg>json=${valid_user}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-08-06T14:43:34.046543" elapsed="0.578332"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>201</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-08-06T14:43:34.625970" elapsed="0.000906"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-08-06T14:43:34.629043" level="INFO">${json} = {'id': 11}</msg>
+<var>${json}</var>
+<arg>json.loads('''${response.content}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-08-06T14:43:34.627857" elapsed="0.001223"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-08-06T14:43:34.629437" elapsed="0.000260"/>
+</kw>
+<status status="PASS" start="2025-08-06T14:43:34.043463" elapsed="0.586629"/>
+</test>
+<test id="s1-t2" name="Ajout Utilisateur - Champ Obligatoire Manquant" line="31">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-08-06T14:43:34.634176" level="FAIL">AttributeError: 'str' object has no attribute 'items'</msg>
+<var>${response}</var>
+<arg>fakestore</arg>
+<arg>/users</arg>
+<arg>json=${missing_email}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-08-06T14:43:34.632725" elapsed="0.010251">AttributeError: 'str' object has no attribute 'items'</status>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" start="2025-08-06T14:43:34.643726" elapsed="0.000095"/>
+</kw>
+<status status="FAIL" start="2025-08-06T14:43:34.631424" elapsed="0.012907">AttributeError: 'str' object has no attribute 'items'</status>
+</test>
+<test id="s1-t3" name="Ajout Utilisateur - Email au Mauvais Format" line="35">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-08-06T14:43:34.647511" level="FAIL">AttributeError: 'str' object has no attribute 'items'</msg>
+<var>${response}</var>
+<arg>fakestore</arg>
+<arg>/users</arg>
+<arg>json=${invalid_email_type}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-08-06T14:43:34.646778" elapsed="0.003465">AttributeError: 'str' object has no attribute 'items'</status>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" start="2025-08-06T14:43:34.650721" elapsed="0.000034"/>
+</kw>
+<status status="FAIL" start="2025-08-06T14:43:34.646162" elapsed="0.004996">AttributeError: 'str' object has no attribute 'items'</status>
+</test>
+<test id="s1-t4" name="Lecture Utilisateur - Scénario Passant" line="41">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-08-06T14:43:34.881051" level="INFO">GET Request : url=https://fakestoreapi.com/users/1 
+ path_url=/users/1 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-08-06T14:43:34.881349" level="INFO">GET Response : url=https://fakestoreapi.com/users/1 
+ status=200, reason=OK 
+ headers={'Date': 'Wed, 06 Aug 2025 14:43:36 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Content-Encoding': 'gzip', 'access-control-allow-origin': '*', 'etag': 'W/"120-HNMhv14aQeBJetA9fBvavCZ+gdk"', 'x-powered-by': 'Express', 'cf-cache-status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=QDuJGShXvKOfLg99FzW9e4QYljbHMV7ExmQndw2xGmfspX79ZdmD%2FAas2dA9ET%2B7%2FDWisR1SGHjbpuFRWVF5jyONR0r9S5oCdJ4rr5ANqhfJ2YA838agx6Vy1OgezGqmvLcn"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '96af4eb63a9335ab-MAD', 'alt-svc': 'h3=":443"; ma=86400', 'server-timing': 'cfL4;desc="?proto=TCP&amp;rtt=66302&amp;min_rtt=58216&amp;rtt_var=31332&amp;sent=6&amp;recv=8&amp;lost=0&amp;retrans=0&amp;sent_bytes=4260&amp;recv_bytes=1097&amp;delivery_rate=37610&amp;cwnd=236&amp;unsent_bytes=0&amp;cid=8648653a65602188&amp;ts=639&amp;x=0"'} 
+ body={"address":{"geolocation":{"lat":"-37.3159","long":"81.1496"},"city":"kilcoole","street":"new road","number":7682,"zipcode":"12926-3874"},"id":1,"email":"john@gmail.com","username":"johnd","password":"m38rmF$","name":{"firstname":"john","lastname":"doe"},"phone":"1-570-236-7033","__v":0} 
+ </msg>
+<msg time="2025-08-06T14:43:34.882061" level="INFO">C:\Users\bchan\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'fakestoreapi.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-08-06T14:43:34.883819" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>fakestore</arg>
+<arg>/users/1</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-08-06T14:43:34.656235" elapsed="0.227832"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-08-06T14:43:34.885332" elapsed="0.001105"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-08-06T14:43:34.892029" level="INFO">${json} = {'address': {'geolocation': {'lat': '-37.3159', 'long': '81.1496'}, 'city': 'kilcoole', 'street': 'new road', 'number': 7682, 'zipcode': '12926-3874'}, 'id': 1, 'email': 'john@gmail.com', 'username': ...</msg>
+<var>${json}</var>
+<arg>json.loads('''${response.content}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-08-06T14:43:34.887583" elapsed="0.004681"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-08-06T14:43:34.893544" elapsed="0.000992"/>
+</kw>
+<status status="PASS" start="2025-08-06T14:43:34.653085" elapsed="0.242675"/>
+</test>
+<test id="s1-t5" name="Lecture Utilisateur - ID Inexistant" line="47">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-08-06T14:43:35.137559" level="INFO">GET Request : url=https://fakestoreapi.com/users/9999 
+ path_url=/users/9999 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-08-06T14:43:35.137863" level="INFO">GET Response : url=https://fakestoreapi.com/users/9999 
+ status=200, reason=OK 
+ headers={'Date': 'Wed, 06 Aug 2025 14:43:36 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '4', 'Connection': 'keep-alive', 'CF-RAY': '96af4eb7bbe435ab-MAD', 'access-control-allow-origin': '*', 'etag': 'W/"4-K+iMpCQsduglOsYkdIUQZQMtaDM"', 'x-powered-by': 'Express', 'cf-cache-status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=dImi9cthmEWW6Ztp9afXHZpR%2FV3D8GvcrlrP5UmrynOQkci3Lide40WMEr0AcUzsNRexbZct2iSVRdtQ99pnhu0zRpx23Cbd5FOCZrXNRc9%2BUKLZawge6ZuvM9bdTK8MpOAp"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'alt-svc': 'h3=":443"; ma=86400', 'server-timing': 'cfL4;desc="?proto=TCP&amp;rtt=65166&amp;min_rtt=57104&amp;rtt_var=25771&amp;sent=9&amp;recv=10&amp;lost=0&amp;retrans=0&amp;sent_bytes=5464&amp;recv_bytes=1276&amp;delivery_rate=51038&amp;cwnd=238&amp;unsent_bytes=0&amp;cid=8648653a65602188&amp;ts=891&amp;x=0"'} 
+ body=null 
+ </msg>
+<msg time="2025-08-06T14:43:35.138118" level="INFO">C:\Users\bchan\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'fakestoreapi.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-08-06T14:43:35.139973" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>fakestore</arg>
+<arg>/users/9999</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-08-06T14:43:34.901159" elapsed="0.239078"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-08-06T14:43:35.142207" level="FAIL">Url: https://fakestoreapi.com/users/9999 Expected status: 200 != 404</msg>
+<arg>404</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-08-06T14:43:35.141349" elapsed="0.004030">Url: https://fakestoreapi.com/users/9999 Expected status: 200 != 404</status>
+</kw>
+<status status="FAIL" start="2025-08-06T14:43:34.898942" elapsed="0.246916">Url: https://fakestoreapi.com/users/9999 Expected status: 200 != 404</status>
+</test>
+<test id="s1-t6" name="Lecture Utilisateur - ID Malformé" line="51">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-08-06T14:43:35.289015" level="INFO">GET Request : url=https://fakestoreapi.com/users/abc 
+ path_url=/users/abc 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-08-06T14:43:35.289376" level="INFO">GET Response : url=https://fakestoreapi.com/users/abc 
+ status=400, reason=Bad Request 
+ headers={'Date': 'Wed, 06 Aug 2025 14:43:36 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '57', 'Connection': 'keep-alive', 'CF-RAY': '96af4eb94d5235ab-MAD', 'access-control-allow-origin': '*', 'etag': 'W/"39-c+fGpiiXQH9CfiwB4wJOltECia0"', 'x-powered-by': 'Express', 'cf-cache-status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=68n6EGk5NQUdBnykN45dgtPtqzkh74Dh%2FDL0YGTu8EBErDWle%2FIBIgtXgMHybXRu%2F6AXI0Ae62SGaPkn09yre5mEH%2FQFn%2B56vgRAwEGzRItcz644O6t98kFZFVK%2FpqljK5fA"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'alt-svc': 'h3=":443"; ma=86400', 'server-timing': 'cfL4;desc="?proto=TCP&amp;rtt=67103&amp;min_rtt=57104&amp;rtt_var=23202&amp;sent=11&amp;recv=11&amp;lost=0&amp;retrans=0&amp;sent_bytes=6376&amp;recv_bytes=1454&amp;delivery_rate=51038&amp;cwnd=239&amp;unsent_bytes=0&amp;cid=8648653a65602188&amp;ts=1047&amp;x=0"'} 
+ body={"status":"error","message":"user id should be provided"} 
+ </msg>
+<msg time="2025-08-06T14:43:35.289711" level="INFO">C:\Users\bchan\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'fakestoreapi.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-08-06T14:43:35.291498" level="FAIL">HTTPError: 400 Client Error: Bad Request for url: https://fakestoreapi.com/users/abc</msg>
+<var>${response}</var>
+<arg>fakestore</arg>
+<arg>/users/abc</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-08-06T14:43:35.148671" elapsed="0.147088">HTTPError: 400 Client Error: Bad Request for url: https://fakestoreapi.com/users/abc</status>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" start="2025-08-06T14:43:35.296848" elapsed="0.000107"/>
+</kw>
+<status status="FAIL" start="2025-08-06T14:43:35.147541" elapsed="0.150515">HTTPError: 400 Client Error: Bad Request for url: https://fakestoreapi.com/users/abc</status>
+</test>
+<test id="s1-t7" name="Modification Utilisateur - Scénario Passant" line="57">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-08-06T14:43:35.306983" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-08-06T14:43:35.305803" elapsed="0.001435"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-08-06T14:43:35.309796" level="INFO">${update_user} = {'username': 'new_name', 'email': 'new@example.com', 'password': 'newpass'}</msg>
+<var>${update_user}</var>
+<arg>{"username": "new_name", "email": "new@example.com", "password": "newpass"}</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-08-06T14:43:35.308724" elapsed="0.001206"/>
+</kw>
+<kw name="PUT On Session" owner="RequestsLibrary">
+<msg time="2025-08-06T14:43:35.445437" level="INFO">PUT Request : url=https://fakestoreapi.com/users/1 
+ path_url=/users/1 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '75'} 
+ body=b'{"username": "new_name", "email": "new@example.com", "password": "newpass"}' 
+ </msg>
+<msg time="2025-08-06T14:43:35.445745" level="INFO">PUT Response : url=https://fakestoreapi.com/users/1 
+ status=200, reason=OK 
+ headers={'Date': 'Wed, 06 Aug 2025 14:43:36 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Content-Encoding': 'gzip', 'access-control-allow-origin': '*', 'etag': 'W/"46-SO+dTr65SXV8IL2lyif0UVy6lWQ"', 'x-powered-by': 'Express', 'cf-cache-status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=dSg6hB8%2FKiuKiBKM8svIAW17qsRND%2BTRxj%2BIuDg93wZs7142oXjtsTiZb1okxhOUns0rNCnP50zCluFCRvcH%2FfzaVtZUPVpST3VYRwgwcpH3tCyfApBfi03w2dEvLfFihvuw"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '96af4eba5e6035ab-MAD', 'alt-svc': 'h3=":443"; ma=86400', 'server-timing': 'cfL4;desc="?proto=TCP&amp;rtt=70194&amp;min_rtt=57104&amp;rtt_var=23584&amp;sent=14&amp;recv=13&amp;lost=0&amp;retrans=0&amp;sent_bytes=7362&amp;recv_bytes=1779&amp;delivery_rate=51038&amp;cwnd=240&amp;unsent_bytes=0&amp;cid=8648653a65602188&amp;ts=1203&amp;x=0"'} 
+ body={"username":"new_name","email":"new@example.com","password":"newpass"} 
+ </msg>
+<msg time="2025-08-06T14:43:35.446052" level="INFO">C:\Users\bchan\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'fakestoreapi.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-08-06T14:43:35.448073" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>fakestore</arg>
+<arg>/users/1</arg>
+<arg>json=${update_user}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-08-06T14:43:35.310985" elapsed="0.137312"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-08-06T14:43:35.449319" elapsed="0.000734"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-08-06T14:43:35.454361" level="INFO">${json} = {'username': 'new_name', 'email': 'new@example.com', 'password': 'newpass'}</msg>
+<var>${json}</var>
+<arg>json.loads('''${response.content}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-08-06T14:43:35.451386" elapsed="0.003117"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-08-06T14:43:35.456077" level="INFO">{'username': 'new_name', 'email': 'new@example.com', 'password': 'newpass'}</msg>
+<arg>${json}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-08-06T14:43:35.455522" elapsed="0.000754"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${json}</arg>
+<arg>username</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-08-06T14:43:35.457185" elapsed="0.000701"/>
+</kw>
+<status status="PASS" start="2025-08-06T14:43:35.302708" elapsed="0.156107"/>
+</test>
+<test id="s1-t8" name="Modification Utilisateur - Inexistant" line="66">
+<kw name="PUT On Session" owner="RequestsLibrary">
+<msg time="2025-08-06T14:43:35.467682" level="FAIL">AttributeError: 'str' object has no attribute 'items'</msg>
+<var>${response}</var>
+<arg>fakestore</arg>
+<arg>/users/9999</arg>
+<arg>json=${update_user}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-08-06T14:43:35.464691" elapsed="0.009046">AttributeError: 'str' object has no attribute 'items'</status>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>404</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" start="2025-08-06T14:43:35.474500" elapsed="0.000110"/>
+</kw>
+<status status="FAIL" start="2025-08-06T14:43:35.462236" elapsed="0.015216">AttributeError: 'str' object has no attribute 'items'</status>
+</test>
+<test id="s1-t9" name="Modification Utilisateur - Champs Invalides" line="70">
+<kw name="PUT On Session" owner="RequestsLibrary">
+<msg time="2025-08-06T14:43:35.481638" level="FAIL">AttributeError: 'str' object has no attribute 'items'</msg>
+<var>${response}</var>
+<arg>fakestore</arg>
+<arg>/users/1</arg>
+<arg>json=${invalid_fields}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-08-06T14:43:35.480709" elapsed="0.004246">AttributeError: 'str' object has no attribute 'items'</status>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" start="2025-08-06T14:43:35.485498" elapsed="0.000038"/>
+</kw>
+<status status="FAIL" start="2025-08-06T14:43:35.479945" elapsed="0.006035">AttributeError: 'str' object has no attribute 'items'</status>
+</test>
+<test id="s1-t10" name="Suppression Utilisateur - Scénario Passant" line="76">
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2025-08-06T14:43:35.724770" level="INFO">DELETE Request : url=https://fakestoreapi.com/users/2 
+ path_url=/users/2 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-08-06T14:43:35.725076" level="INFO">DELETE Response : url=https://fakestoreapi.com/users/2 
+ status=200, reason=OK 
+ headers={'Date': 'Wed, 06 Aug 2025 14:43:37 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Content-Encoding': 'gzip', 'access-control-allow-origin': '*', 'etag': 'W/"12d-rQ3vazNILlcEdp3VtaYW0Rr1+SY"', 'x-powered-by': 'Express', 'cf-cache-status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=kHDFd0SZu3etrLShN749hEGfzjL3jAvsP2%2FGKRDnjeqIdb%2BoekxOY1b5eUdgAQkilJ2S6jRlkaMM8JdUSflKrvUY9SsKewawGUPk6sY9bMUuI3XCeEzqXj1WSzseAxfIfwxl"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '96af4ebb6fa235ab-MAD', 'alt-svc': 'h3=":443"; ma=86400', 'server-timing': 'cfL4;desc="?proto=TCP&amp;rtt=69380&amp;min_rtt=57104&amp;rtt_var=19316&amp;sent=17&amp;recv=15&amp;lost=0&amp;retrans=0&amp;sent_bytes=8425&amp;recv_bytes=1977&amp;delivery_rate=51038&amp;cwnd=240&amp;unsent_bytes=0&amp;cid=8648653a65602188&amp;ts=1468&amp;x=0"'} 
+ body={"address":{"geolocation":{"lat":"-37.3159","long":"81.1496"},"city":"kilcoole","street":"Lovers Ln","number":7267,"zipcode":"12926-3874"},"id":2,"email":"morrison@gmail.com","username":"mor_2314","password":"83r5^_","name":{"firstname":"david","lastname":"morrison"},"phone":"1-570-236-7033","__v":0} 
+ </msg>
+<msg time="2025-08-06T14:43:35.725512" level="INFO">C:\Users\bchan\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'fakestoreapi.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-08-06T14:43:35.727432" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>fakestore</arg>
+<arg>/users/2</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-08-06T14:43:35.490108" elapsed="0.237506"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${response.status_code} in [200, 204]</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-08-06T14:43:35.727976" elapsed="0.000597"/>
+</kw>
+<status status="PASS" start="2025-08-06T14:43:35.489155" elapsed="0.239791"/>
+</test>
+<test id="s1-t11" name="Suppression Utilisateur - Inexistant" line="80">
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2025-08-06T14:43:35.955255" level="INFO">DELETE Request : url=https://fakestoreapi.com/users/9999 
+ path_url=/users/9999 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-08-06T14:43:35.955559" level="INFO">DELETE Response : url=https://fakestoreapi.com/users/9999 
+ status=200, reason=OK 
+ headers={'Date': 'Wed, 06 Aug 2025 14:43:37 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '4', 'Connection': 'keep-alive', 'CF-RAY': '96af4ebcea2435ab-MAD', 'access-control-allow-origin': '*', 'etag': 'W/"4-K+iMpCQsduglOsYkdIUQZQMtaDM"', 'x-powered-by': 'Express', 'cf-cache-status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=9M8Q0s1sRBRzB1FrDoKgtuj3wJLlbvstEQhm1GhBBDtaH9h3bEcqRHqSLjNomvwDZ3ioic3e%2FdD0zrD7g%2Fvtp9kOiYr8vsNH0irTUoKmuTp%2Fg1TyPI9WAPpy7BRXCZIzI9Tv"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'alt-svc': 'h3=":443"; ma=86400', 'server-timing': 'cfL4;desc="?proto=TCP&amp;rtt=69949&amp;min_rtt=57104&amp;rtt_var=15626&amp;sent=20&amp;recv=17&amp;lost=0&amp;retrans=0&amp;sent_bytes=9640&amp;recv_bytes=2178&amp;delivery_rate=51038&amp;cwnd=240&amp;unsent_bytes=0&amp;cid=8648653a65602188&amp;ts=1713&amp;x=0"'} 
+ body=null 
+ </msg>
+<msg time="2025-08-06T14:43:35.955810" level="INFO">C:\Users\bchan\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'fakestoreapi.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-08-06T14:43:35.957634" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>fakestore</arg>
+<arg>/users/9999</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-08-06T14:43:35.730721" elapsed="0.227181"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<msg time="2025-08-06T14:43:35.959906" level="FAIL">Url: https://fakestoreapi.com/users/9999 Expected status: 200 != 404</msg>
+<arg>404</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="FAIL" start="2025-08-06T14:43:35.958975" elapsed="0.002844">Url: https://fakestoreapi.com/users/9999 Expected status: 200 != 404</status>
+</kw>
+<status status="FAIL" start="2025-08-06T14:43:35.730149" elapsed="0.232153">Url: https://fakestoreapi.com/users/9999 Expected status: 200 != 404</status>
+</test>
+<test id="s1-t12" name="Suppression Utilisateur - ID Malformé" line="84">
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2025-08-06T14:43:36.086071" level="INFO">DELETE Request : url=https://fakestoreapi.com/users/abc 
+ path_url=/users/abc 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-08-06T14:43:36.086216" level="INFO">DELETE Response : url=https://fakestoreapi.com/users/abc 
+ status=400, reason=Bad Request 
+ headers={'Date': 'Wed, 06 Aug 2025 14:43:37 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '57', 'Connection': 'keep-alive', 'CF-RAY': '96af4ebe6bbe35ab-MAD', 'access-control-allow-origin': '*', 'etag': 'W/"39-c+fGpiiXQH9CfiwB4wJOltECia0"', 'x-powered-by': 'Express', 'cf-cache-status': 'DYNAMIC', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=9ZbKgWvV9Ao5tDMfdIC6cDqAKrCa0gWD%2FJWgsfiYXLH7MJUzq4xTH9J2JFOr3SbN5bl8gPJbfeQBSfCPq9d7wG2LRXxYnSM6p9MBsgNeczRJA8UTcrN3K3ddRISeStfekLMd"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'alt-svc': 'h3=":443"; ma=86400', 'server-timing': 'cfL4;desc="?proto=TCP&amp;rtt=70593&amp;min_rtt=57104&amp;rtt_var=13007&amp;sent=22&amp;recv=18&amp;lost=0&amp;retrans=0&amp;sent_bytes=10556&amp;recv_bytes=2378&amp;delivery_rate=51038&amp;cwnd=240&amp;unsent_bytes=0&amp;cid=8648653a65602188&amp;ts=1845&amp;x=0"'} 
+ body={"status":"error","message":"user id should be provided"} 
+ </msg>
+<msg time="2025-08-06T14:43:36.086352" level="INFO">C:\Users\bchan\AppData\Local\Programs\Python\Python313\Lib\site-packages\urllib3\connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'fakestoreapi.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-08-06T14:43:36.087602" level="FAIL">HTTPError: 400 Client Error: Bad Request for url: https://fakestoreapi.com/users/abc</msg>
+<var>${response}</var>
+<arg>fakestore</arg>
+<arg>/users/abc</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-08-06T14:43:35.965036" elapsed="0.124444">HTTPError: 400 Client Error: Bad Request for url: https://fakestoreapi.com/users/abc</status>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" start="2025-08-06T14:43:36.090059" elapsed="0.000057"/>
+</kw>
+<status status="FAIL" start="2025-08-06T14:43:35.963950" elapsed="0.126614">HTTPError: 400 Client Error: Bad Request for url: https://fakestoreapi.com/users/abc</status>
+</test>
+<status status="FAIL" start="2025-08-06T14:43:33.200181" elapsed="2.893208"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="8" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Crud Tests Utilisateur" id="s1" pass="4" fail="8" skip="0">Crud Tests Utilisateur</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

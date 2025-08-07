@@ -1,0 +1,18 @@
+1754516936571	geckodriver	INFO	Listening on 127.0.0.1:53643
+1754516939610	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--remote-debugging-port" "53644" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\bchan\\AppData\\Local\\Temp\\rust_mozprofileWbqQOA"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+Dynamically enable window occlusion 0
+1754516940216	Marionette	INFO	Marionette enabled
+1754516941729	Marionette	INFO	Listening on port 53652
+WebDriver BiDi listening on ws://127.0.0.1:53644
+Read port: 53652
+1754516942339	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.error: (new TypeError("can't access property \"find\", this._searchProviderInfo is null", "moz-src:///browser/components/search/SearchSERPTelemetry.sys.mjs", 998))
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://automationplayground.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://automationplayground.com."
+1754516956953	Marionette	INFO	Stopped listening on port 53652
+Dynamically enable window occlusion 1
+console.error: "Failed to fetch https://ads.mozilla.org/v1/delete_user:" "NetworkError when attempting to fetch resource."
+console.warn: TopSitesFeed: Failed to fetch data from MARS server: NetworkError when attempting to fetch resource.
+JavaScript error: resource://services-settings/RemoteSettingsClient.sys.mjs, line 101: Error: Unknown callback

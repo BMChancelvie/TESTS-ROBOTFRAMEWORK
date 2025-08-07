@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.5 on win32)" generated="2025-08-06T21:53:03.746777" rpa="false" schemaversion="5">
+<suite id="s1" name="Should be able to cancel adding new customer" source="C:\wamp64\www\TEST_Qa\Projet_Qa_Tests\Lab_2\Should_be_able_to_cancel_adding_new_customer.robot">
+<test id="s1-t1" name="Should Be Able To Cancel Adding New Customer" line="11">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-08-06T21:53:04.063869" level="INFO">Opening browser 'firefox' to base url 'https://automationplayground.com/crm/'.</msg>
+<arg>${URL}</arg>
+<arg>firefox</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-08-06T21:53:04.063477" elapsed="13.551180"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2025-08-06T21:53:17.617060" elapsed="0.314905"/>
+</kw>
+<kw name="Click Link" owner="SeleniumLibrary">
+<msg time="2025-08-06T21:53:17.933541" level="INFO">Clicking link 'Sign In'.</msg>
+<arg>Sign In</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<status status="PASS" start="2025-08-06T21:53:17.932659" elapsed="1.223669"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-08-06T21:53:19.157853" level="INFO">Typing text 'admin@robotframeworktutorial.com' into text field 'name:email-name'.</msg>
+<arg>name:email-name</arg>
+<arg>${LOGIN_EMAIL}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-08-06T21:53:19.157004" elapsed="0.185634"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-08-06T21:53:19.344614" level="INFO">Typing text 'pa55word' into text field 'name:password-name'.</msg>
+<arg>name:password-name</arg>
+<arg>${LOGIN_PASSWORD}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-08-06T21:53:19.344152" elapsed="0.073795"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-08-06T21:53:19.419271" level="INFO">Clicking button 'id:submit-id'.</msg>
+<arg>id:submit-id</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-08-06T21:53:19.418700" elapsed="1.056241"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Customers</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-08-06T21:53:20.489493" elapsed="0.031799"/>
+</kw>
+<kw name="Click Link" owner="SeleniumLibrary">
+<msg time="2025-08-06T21:53:20.526496" level="INFO">Clicking link 'New Customer'.</msg>
+<arg>New Customer</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<status status="PASS" start="2025-08-06T21:53:20.525126" elapsed="1.778309"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Add Customer</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-08-06T21:53:22.305428" elapsed="0.018089"/>
+</kw>
+<kw name="Click Link" owner="SeleniumLibrary">
+<msg time="2025-08-06T21:53:22.331941" level="INFO">Clicking link 'Cancel'.</msg>
+<arg>Cancel</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<status status="PASS" start="2025-08-06T21:53:22.331516" elapsed="0.588176"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Customers</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2025-08-06T21:53:22.921659" elapsed="0.082877"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-08-06T21:53:23.005159" elapsed="6.107708"/>
+</kw>
+<status status="PASS" start="2025-08-06T21:53:04.062048" elapsed="25.051742"/>
+</test>
+<status status="PASS" start="2025-08-06T21:53:03.749125" elapsed="25.368156"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Should be able to cancel adding new customer" id="s1" pass="1" fail="0" skip="0">Should be able to cancel adding new customer</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
